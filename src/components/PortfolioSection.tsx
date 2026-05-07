@@ -206,7 +206,11 @@ function CTABlock({ className }: { className?: string }) {
 // ── Section ───────────────────────────────────────────────────────────────────
 
 export default async function PortfolioSection() {
-  const projects: PortfolioItem[] = await client.fetch(FEATURED_PORTFOLIO_QUERY)
+  const projects: PortfolioItem[] = await client.fetch(
+    FEATURED_PORTFOLIO_QUERY,
+    {},
+    { next: { tags: ['portfolio'] } }
+  )
 
   return (
     <section className="w-full px-4 md:px-8 py-12 md:py-[80px]">
