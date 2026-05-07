@@ -16,7 +16,7 @@ export default function Home() {
       <main>
         {/* light = dark-bg section → white navbar text */}
         {/* dark  = light-bg section → black navbar text */}
-        <div data-nav-theme="dark"><HeroSection /></div>
+        <div data-nav-theme="dark-transparent"><HeroSection /></div>
         <div data-nav-theme="dark"><IntroSection /></div>
         <div data-nav-theme="dark"><AboutSection /></div>
         <div data-nav-theme="light"><FullImageSection /></div>

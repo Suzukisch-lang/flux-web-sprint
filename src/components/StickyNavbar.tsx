@@ -7,8 +7,9 @@ import Navbar from "./Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// data-nav-theme="light"  → over dark section  → white text  + transparent bg
-// data-nav-theme="dark"   → over light section → black text  + frosted white bg
+// data-nav-theme="light"             → white text + transparent bg  (dark sections)
+// data-nav-theme="dark"              → black text + frosted white bg (light sections)
+// data-nav-theme="dark-transparent"  → black text + transparent bg  (hero)
 
 export default function StickyNavbar() {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -26,13 +27,14 @@ export default function StickyNavbar() {
     const navCta   = () => el.querySelector<HTMLElement>("[data-nav-cta]");
 
     const applyTheme = (theme: string, animate = true) => {
-      const isLight = theme === "light"; // "light" = over dark bg = white nav
-      const dur = animate ? 0.38 : 0;
+      const whiteText = theme === "light";          // white text
+      const showBg    = theme === "dark";            // frosted bg only for fully dark theme
+      const dur  = animate ? 0.38 : 0;
       const ease = "power2.inOut";
 
       // Text + logo colour
       gsap.to(navItems(), {
-        color: isLight ? "#ffffff" : "#000000",
+        color: whiteText ? "#ffffff" : "#000000",
         duration: dur, ease, overwrite: "auto",
       });
 
@@ -40,15 +42,15 @@ export default function StickyNavbar() {
       const cta = navCta();
       if (cta) {
         gsap.to(cta, {
-          backgroundColor: isLight ? "#ffffff" : "#000000",
-          color:           isLight ? "#000000" : "#ffffff",
+          backgroundColor: whiteText ? "#ffffff" : "#000000",
+          color:           whiteText ? "#000000" : "#ffffff",
           duration: dur, ease, overwrite: "auto",
         });
       }
 
-      // Background panel: transparent on dark sections, frosted on light ones
+      // Background panel
       gsap.to(bg, {
-        opacity:  isLight ? 0 : 1,
+        opacity:  showBg ? 1 : 0,
         duration: animate ? 0.42 : 0,
         ease,
         overwrite: "auto",
@@ -58,8 +60,8 @@ export default function StickyNavbar() {
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      // Initial state: hero has light-ish photo top → dark nav, frosted bg
-      applyTheme("dark", false);
+      // Initial state: hero → black text, transparent bg
+      applyTheme("dark-transparent", false);
 
       // ── ScrollTrigger: colour per section ─────────────────────────────
       const sections = document.querySelectorAll<HTMLElement>("[data-nav-theme]");
