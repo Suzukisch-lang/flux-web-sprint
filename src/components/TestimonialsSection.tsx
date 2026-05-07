@@ -173,7 +173,7 @@ export default function TestimonialsSection() {
       </div>
 
       {/* ── Desktop: scattered cards around big centred title ────── */}
-      <div className="hidden md:flex relative w-full min-h-[870px] flex-col items-center justify-center px-8 py-[120px]">
+      <div className="hidden md:flex relative w-full min-h-[987px] flex-col items-center justify-center px-8 py-[120px]">
 
         {/* Lukas — paints BELOW the title (first in DOM) */}
         {BEHIND_TITLE.map((t) => (
