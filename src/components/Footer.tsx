@@ -1,3 +1,5 @@
+import PrimaryButton from "./PrimaryButton";
+
 // ── Shared styles ─────────────────────────────────────────────────────────────
 
 const ctaHeadStyle: React.CSSProperties = {
@@ -21,15 +23,6 @@ const socialStyle: React.CSSProperties = {
   textTransform: "uppercase",
 };
 
-const btnTextStyle: React.CSSProperties = {
-  fontFamily: "var(--font-inter, Inter, sans-serif)",
-  fontWeight: 500,
-  fontSize: "14px",
-  lineHeight: "normal",
-  letterSpacing: "-0.04em",
-  color: "#fff",
-  whiteSpace: "nowrap",
-};
 
 const legalStyle: React.CSSProperties = {
   fontFamily: "var(--font-inter, Inter, sans-serif)",
@@ -78,9 +71,9 @@ export default function Footer() {
               <span style={{ fontWeight: 900, fontStyle: "normal" }}>project</span>
               {" "}in mind?
             </p>
-            <button className="self-start flex items-center border border-white px-4 py-3 rounded-full">
-              <span style={btnTextStyle}>Let&apos;s talk</span>
-            </button>
+            <PrimaryButton variant="outline" className="self-start">
+              Let&apos;s talk
+            </PrimaryButton>
           </div>
           <div className="flex flex-col gap-4">
             {["Facebook", "Instagram", "X.com", "Linkedin"].map((name) => (
@@ -119,9 +112,9 @@ export default function Footer() {
                 <span style={{ fontWeight: 900, fontStyle: "normal" }}>project</span>
                 {" "}in mind?
               </p>
-              <button className="self-start flex items-center border border-white px-4 py-3 rounded-full">
-                <span style={btnTextStyle}>Let&apos;s talk</span>
-              </button>
+              <PrimaryButton variant="outline" className="self-start">
+                Let&apos;s talk
+              </PrimaryButton>
             </div>
 
             {/* Centre: Facebook + Instagram */}

@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+import PrimaryButton from "./PrimaryButton";
 
 const HERO_IMAGE = "/hero-bg.jpg";
 
@@ -98,16 +99,9 @@ export default function HeroSection() {
                 desing and art group specializing in branding, web design and
                 engineering.
               </p>
-              <button
-                className="self-start bg-black text-white px-4 py-3 rounded-3xl text-sm cursor-pointer transition-opacity hover:opacity-80"
-                style={{
-                  fontFamily: "var(--font-inter, Inter, sans-serif)",
-                  fontWeight: 500,
-                  letterSpacing: "-0.04em",
-                }}
-              >
+              <PrimaryButton className="self-start">
                 Let&apos;s talk
-              </button>
+              </PrimaryButton>
             </div>
           </div>
         </div>
