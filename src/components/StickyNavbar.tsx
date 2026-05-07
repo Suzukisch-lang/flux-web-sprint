@@ -7,8 +7,8 @@ import Navbar from "./Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// data-nav-theme="light"  → navbar over a dark section  → white text, white CTA
-// data-nav-theme="dark"   → navbar over a light section → black text, black CTA
+// data-nav-theme="light"  → over dark section  → white text  + transparent bg
+// data-nav-theme="dark"   → over light section → black text  + frosted white bg
 
 export default function StickyNavbar() {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -22,44 +22,46 @@ export default function StickyNavbar() {
     const bg = bgRef.current;
     if (!el || !bg) return;
 
-    // ── Color helpers ──────────────────────────────────────────────────────
     const navItems = () => el.querySelectorAll<HTMLElement>("[data-nav-item]");
-    const navCta = () => el.querySelector<HTMLElement>("[data-nav-cta]");
+    const navCta   = () => el.querySelector<HTMLElement>("[data-nav-cta]");
 
     const applyTheme = (theme: string, animate = true) => {
-      const isLight = theme === "light"; // light = over dark bg = white nav
-      const textColor = isLight ? "#ffffff" : "#000000";
-      const btnBg   = isLight ? "#ffffff" : "#000000";
-      const btnText = isLight ? "#000000" : "#ffffff";
+      const isLight = theme === "light"; // "light" = over dark bg = white nav
       const dur = animate ? 0.38 : 0;
+      const ease = "power2.inOut";
 
+      // Text + logo colour
       gsap.to(navItems(), {
-        color: textColor,
-        duration: dur,
-        ease: "power2.inOut",
-        overwrite: "auto",
+        color: isLight ? "#ffffff" : "#000000",
+        duration: dur, ease, overwrite: "auto",
       });
 
+      // CTA button colour
       const cta = navCta();
       if (cta) {
         gsap.to(cta, {
-          backgroundColor: btnBg,
-          color: btnText,
-          duration: dur,
-          ease: "power2.inOut",
-          overwrite: "auto",
+          backgroundColor: isLight ? "#ffffff" : "#000000",
+          color:           isLight ? "#000000" : "#ffffff",
+          duration: dur, ease, overwrite: "auto",
         });
       }
+
+      // Background panel: transparent on dark sections, frosted on light ones
+      gsap.to(bg, {
+        opacity:  isLight ? 0 : 1,
+        duration: animate ? 0.42 : 0,
+        ease,
+        overwrite: "auto",
+      });
     };
 
-    // ── Scroll hide / show (desktop only via matchMedia) ───────────────────
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      // Set initial theme: page starts on hero (dark bg → light nav)
+      // Initial state: page starts at hero (dark bg → light nav, transparent bg)
       applyTheme("light", false);
 
-      // ── ScrollTrigger: colour change per section ───────────────────────
+      // ── ScrollTrigger: colour per section ─────────────────────────────
       const sections = document.querySelectorAll<HTMLElement>("[data-nav-theme]");
       sections.forEach((section) => {
         const theme = section.getAttribute("data-nav-theme") ?? "light";
@@ -67,30 +69,25 @@ export default function StickyNavbar() {
           trigger: section,
           start: "top top",
           end: "bottom top",
-          onEnter: ()      => applyTheme(theme),
-          onEnterBack: ()  => applyTheme(theme),
+          onEnter:     () => applyTheme(theme),
+          onEnterBack: () => applyTheme(theme),
         });
       });
 
-      // ── Scroll hide / show ────────────────────────────────────────────
+      // ── Hide / reveal on scroll direction ─────────────────────────────
       const onScroll = () => {
         const y = window.scrollY;
         const delta = y - lastScrollY.current;
         lastScrollY.current = y;
 
-        // Background: frosted glass fades in over first 120 px
-        gsap.set(bg, { opacity: Math.min(y / 120, 1) });
-
-        // Always visible near the top
+        // Always show when near the top
         if (y < 80) {
           if (isHidden.current) {
             isHidden.current = false;
             activeTween.current?.kill();
             activeTween.current = gsap.to(el, {
-              yPercent: 0,
-              opacity: 1,
-              duration: 0.55,
-              ease: "expo.out",
+              yPercent: 0, opacity: 1,
+              duration: 0.55, ease: "expo.out",
             });
           }
           return;
@@ -101,10 +98,8 @@ export default function StickyNavbar() {
           isHidden.current = true;
           activeTween.current?.kill();
           activeTween.current = gsap.to(el, {
-            yPercent: -115,
-            opacity: 0.6,
-            duration: 0.48,
-            ease: "power3.inOut",
+            yPercent: -115, opacity: 0.6,
+            duration: 0.48, ease: "power3.inOut",
           });
           return;
         }
@@ -114,10 +109,8 @@ export default function StickyNavbar() {
           isHidden.current = false;
           activeTween.current?.kill();
           activeTween.current = gsap.to(el, {
-            yPercent: 0,
-            opacity: 1,
-            duration: 0.58,
-            ease: "expo.out",
+            yPercent: 0, opacity: 1,
+            duration: 0.58, ease: "expo.out",
           });
         }
       };
@@ -138,14 +131,13 @@ export default function StickyNavbar() {
       ref={wrapperRef}
       className="fixed top-0 left-0 right-0 z-50 hidden md:block"
     >
-      {/* Frosted glass background — fades in on scroll */}
+      {/* Background panel — animated by applyTheme, not scroll distance */}
       <div
         ref={bgRef}
         className="absolute inset-0 bg-white/90 backdrop-blur-md border-b border-black/10"
         style={{ opacity: 0 }}
       />
 
-      {/* Nav content */}
       <div className="relative px-8">
         <Navbar />
       </div>
