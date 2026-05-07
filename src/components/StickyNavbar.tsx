@@ -58,8 +58,8 @@ export default function StickyNavbar() {
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      // Initial state: page starts at hero (dark bg → light nav, transparent bg)
-      applyTheme("light", false);
+      // Initial state: hero has light-ish photo top → dark nav, frosted bg
+      applyTheme("dark", false);
 
       // ── ScrollTrigger: colour per section ─────────────────────────────
       const sections = document.querySelectorAll<HTMLElement>("[data-nav-theme]");
