@@ -7,10 +7,12 @@ import PortfolioSection from "@/components/PortfolioSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import NewsSection from "@/components/NewsSection";
 import Footer from "@/components/Footer";
+import StickyNavbar from "@/components/StickyNavbar";
 
 export default function Home() {
   return (
     <>
+      <StickyNavbar />
       <main>
         <HeroSection />
         <IntroSection />

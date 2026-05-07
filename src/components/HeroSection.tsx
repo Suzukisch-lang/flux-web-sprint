@@ -33,7 +33,11 @@ export default function HeroSection() {
 
       {/* In-flow content — renders after the absolutes so it sits on top */}
       <div className="relative h-full flex flex-col px-4 md:px-8 justify-between md:justify-start pb-6 md:pb-0">
-        <Navbar />
+        {/* On desktop the StickyNavbar (fixed) takes over — keep this invisible
+            but in-flow so the 240 px gap below stays correctly positioned */}
+        <div className="md:invisible md:pointer-events-none">
+          <Navbar />
+        </div>
 
         {/* 240 px gap below navbar (desktop only — matches Figma spacing) */}
         <div className="hidden md:block shrink-0" style={{ height: "240px" }} />
