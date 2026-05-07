@@ -1,5 +1,6 @@
 import { client, urlFor } from '@/lib/sanity'
 import { FEATURED_PORTFOLIO_QUERY, type PortfolioItem } from '@/lib/queries'
+import PrimaryButton from './PrimaryButton'
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 
@@ -60,16 +61,6 @@ const ctaDescStyle: React.CSSProperties = {
   lineHeight: 1.3,
   letterSpacing: "-0.04em",
   color: "#1f1f1f",
-};
-
-const ctaButtonTextStyle: React.CSSProperties = {
-  fontFamily: "var(--font-inter, Inter, sans-serif)",
-  fontWeight: 500,
-  fontSize: "14px",
-  lineHeight: "normal",
-  letterSpacing: "-0.04em",
-  color: "#fff",
-  whiteSpace: "nowrap",
 };
 
 // ── Corner brackets ───────────────────────────────────────────────────────────
@@ -190,9 +181,9 @@ function CTABlock({ className }: { className?: string }) {
           Discover how my creativity transforms ideas into impactful digital
           experiences — schedule a call with me to get started.
         </p>
-        <button className="flex items-center justify-center px-4 py-3 rounded-full bg-black">
-          <span style={ctaButtonTextStyle}>Let&apos;s talk</span>
-        </button>
+        <PrimaryButton className="border border-black">
+          Let&apos;s talk
+        </PrimaryButton>
       </div>
 
       <div className="flex flex-col justify-between self-stretch w-6 shrink-0">
