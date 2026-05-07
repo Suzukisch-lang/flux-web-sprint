@@ -14,16 +14,18 @@ export default function Home() {
     <>
       <StickyNavbar />
       <main>
-        <HeroSection />
-        <IntroSection />
-        <AboutSection />
-        <FullImageSection />
-        <ServicesSection />
-        <PortfolioSection />
-        <TestimonialsSection />
-        <NewsSection />
+        {/* light = dark-bg section → white navbar text */}
+        {/* dark  = light-bg section → black navbar text */}
+        <div data-nav-theme="light"><HeroSection /></div>
+        <div data-nav-theme="dark"><IntroSection /></div>
+        <div data-nav-theme="dark"><AboutSection /></div>
+        <div data-nav-theme="light"><FullImageSection /></div>
+        <div data-nav-theme="light"><ServicesSection /></div>
+        <div data-nav-theme="dark"><PortfolioSection /></div>
+        <div data-nav-theme="dark"><TestimonialsSection /></div>
+        <div data-nav-theme="dark"><NewsSection /></div>
       </main>
-      <Footer />
+      <div data-nav-theme="light"><Footer /></div>
     </>
   );
 }

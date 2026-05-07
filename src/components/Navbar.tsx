@@ -24,7 +24,7 @@ export default function Navbar() {
     <>
       <header className="relative flex items-center justify-between py-6 shrink-0 w-full">
         {/* Logo */}
-        <span className="text-base text-black capitalize" style={interSemiBold}>
+        <span data-nav-item className="text-base text-black capitalize" style={interSemiBold}>
           H.Studio
         </span>
 
@@ -33,6 +33,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => (
             <Link
               key={link}
+              data-nav-item
               href={`#${link.toLowerCase()}`}
               className="text-base text-black capitalize transition-opacity hover:opacity-60"
               style={interSemiBold}
@@ -44,6 +45,7 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <button
+          data-nav-cta
           className="hidden md:flex items-center justify-center bg-black text-white px-4 py-3 rounded-3xl text-sm cursor-pointer transition-opacity hover:opacity-80"
           style={interMedium}
         >
