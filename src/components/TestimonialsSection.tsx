@@ -1,13 +1,7 @@
-// Testimonials section logos from Figma MCP — expire after 7 days.
-// Replace with local /public images before deploying.
-const LOGO_LUKAS =
-  "https://www.figma.com/api/mcp/asset/550e3404-485b-4137-9b1d-6c8a2116c295";
-const LOGO_MARKO =
-  "https://www.figma.com/api/mcp/asset/139a4c71-2b18-47ca-9363-1563c5042769";
-const LOGO_SARAH =
-  "https://www.figma.com/api/mcp/asset/db717fe4-232a-436c-9f14-cc7410940676";
-const LOGO_SOFIA =
-  "https://www.figma.com/api/mcp/asset/cdf692be-2632-4a88-861f-2dac06dfd7bf";
+const LOGO_LUKAS = "/logo-lukas.png";
+const LOGO_MARKO = "/logo-marko.png";
+const LOGO_SARAH = "/logo-sarah.png";
+const LOGO_SOFIA = "/logo-sofia.png";
 
 type Testimonial = {
   name: string;
