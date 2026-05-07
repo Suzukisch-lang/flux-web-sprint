@@ -1,9 +1,6 @@
 import Navbar from "./Navbar";
 
-// This asset URL is served by the Figma MCP server and expires after 7 days.
-// Replace with a local image in /public before deploying.
-const HERO_IMAGE =
-  "https://www.figma.com/api/mcp/asset/9155d8dc-e7af-4713-8ed1-48a507e2af7e";
+const HERO_IMAGE = "/hero-bg.jpg";
 
 const interMedium: React.CSSProperties = {
   fontFamily: "var(--font-inter, Inter, sans-serif)",
